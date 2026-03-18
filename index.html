@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Cargift</title>
+<title>Cargift 🎀</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -320,7 +320,7 @@ img[data-img-key]:hover{opacity:.85;outline:3px solid rgba(246,166,187,.7);outli
 <!-- ═══ SCREEN 1: TEMPLATE PICKER ═══ -->
 <div class="screen active" id="screen-pick">
   <div class="pick-header">
-    <span class="logo">cargift</span>
+    <span class="logo">✨ cargift</span>
     <h1>Pilih Template</h1>
     <p>Tap template buat mulai edit!</p>
   </div>
@@ -1089,7 +1089,7 @@ function collectHTML(){
   const edits={};
 
   // [NAME] - grab from the name span using template-specific selectors
-  const nameSelMap={birthday1:'#friendName1',birthday2:'#friendName1',bucin2:'#p1name'};
+  const nameSelMap={birthday1:'#friendName1',birthday2:'#friendName1',bucin2:'#p1name',adventure:'#userName'};
   const nameEl=content.querySelector(nameSelMap[curTpl]||'#friendName1');
   if(nameEl && nameEl.textContent.trim()) edits['[NAME]']=nameEl.textContent.trim();
 
@@ -1122,7 +1122,7 @@ function collectHTML(){
   // [LETTER_TEXT] - adventure (#letterText span)
   if(curTpl==='adventure'){
     const el=content.querySelector('#letterText');
-    if(el && el.textContent.trim() && el.textContent.trim()!=='[LETTER_TEXT]')
+    if(el && el.textContent.trim())
       edits['[LETTER_TEXT]']=el.textContent.trim();
   }
 
@@ -1179,7 +1179,7 @@ function collectHTML(){
 
   // Patch only elements NOT already handled in step 4
   const skipIds=new Set(['letterContent','typingText','typeText','letterLong',
-    'friendName1','friendName2','p1name','letterBox','letterText']);
+    'friendName1','friendName2','p1name','letterBox','letterText','userName']);
 
   content.querySelectorAll('[data-editable]').forEach(liveEl=>{
     // Skip elements already patched via edits{}
@@ -1413,3 +1413,4 @@ function toast(msg){
 </script>
 </body>
 </html>
+
