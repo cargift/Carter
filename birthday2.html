@@ -240,6 +240,12 @@ p{font-size:1.15rem;color:var(--dark);margin:8px 0;}
   const GIFTS={cake:"[LETTER1]",icecream:"[LETTER2]",flower:"[LETTER3]"};
 
   const pages=[null,...[1,2,3,4].map(i=>document.getElementById('page'+i))];
+  const nextToPage3Btn=document.getElementById('nextToPage3');
+
+  function stopTyping(){
+    if(timer){clearInterval(timer);timer=null;}
+    if(cursor)cursor.style.display='none';
+  }
   const nameSpans=[document.getElementById('friendName1'),document.getElementById('friendName2')];
   const typingSpan=document.getElementById('typingText');
   const cursor=document.getElementById('cursor');
@@ -261,7 +267,7 @@ p{font-size:1.15rem;color:var(--dark);margin:8px 0;}
     if(timer)clearInterval(timer);
     const existingText=typingSpan.textContent.trim();
     const letterToType=LETTER.includes('[')&&LETTER.includes(']') ? existingText : LETTER;
-    if(!letterToType){if(nextBtn)nextBtn.disabled=false;return;}
+    if(!letterToType){if(nextToPage3Btn)nextToPage3Btn.disabled=false;return;}
     typingSpan.textContent='';
     cursor.style.display='inline-block';
     let i=0;
@@ -273,11 +279,19 @@ p{font-size:1.15rem;color:var(--dark);margin:8px 0;}
       }else{
         clearInterval(timer);timer=null;
         cursor.style.display='none';
-        if(nextBtn)nextBtn.disabled=false;
+        if(nextToPage3Btn)nextToPage3Btn.disabled=false;
       }
     },40);
   };
   document.getElementById('backToStart').addEventListener('click',()=>{stopTyping();showPage(1);});
+
+  // Navigation buttons
+  const nav2=document.getElementById('nextToPage2');
+  const nav3=document.getElementById('nextToPage3');
+  const nav4=document.getElementById('nextToPage4');
+  if(nav2) nav2.addEventListener('click',()=>showPage(2));
+  if(nav3) nav3.addEventListener('click',()=>showPage(3));
+  if(nav4) nav4.addEventListener('click',()=>showPage(4));
 
   document.querySelectorAll('.gift-item').forEach(el=>{
     el.addEventListener('click',()=>{
@@ -299,3 +313,4 @@ p{font-size:1.15rem;color:var(--dark);margin:8px 0;}
 </script>
 </body>
 </html>
+
