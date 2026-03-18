@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Cargift</title>
+<title>Cargift 🎀</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -677,8 +677,11 @@ function renderEditor(){
   cfg.specials.forEach(s=>{
     html=replaceAll(html,s.ph,specialVals[s.key]||s.def);
   });
-  // Adventure: replace [NAME] for preview
-  if(curTpl==='adventure') html=replaceAll(html,'[NAME]','Carter');
+  // Adventure: replace [NAME] and [LETTER_TEXT] for preview
+  if(curTpl==='adventure'){
+    html=replaceAll(html,'[NAME]','Carter');
+    html=replaceAll(html,'[LETTER_TEXT]','dear Carter,\n\ni made this just for you~\nthank you for being you.\n\nwith love 💗');
+  }
 
   // Parse HTML
   const parser=new DOMParser();
@@ -1109,7 +1112,8 @@ function collectHTML(){
   // [LETTER_TEXT] - bucin1
   if(curTpl==='bucin1'){
     const el=content.querySelector('#letterLong');
-    if(el && el.textContent.trim()) edits['[LETTER_TEXT]']=el.textContent.trim();
+    const t=el?el.textContent.trim():'';
+    if(t && t!=='[LETTER_TEXT]') edits['[LETTER_TEXT]']=t;
   }
 
   // [LETTER_TEXT] - bucin2
@@ -1122,8 +1126,8 @@ function collectHTML(){
   // [LETTER_TEXT] - adventure (#letterText span)
   if(curTpl==='adventure'){
     const el=content.querySelector('#letterText');
-    if(el && el.textContent.trim())
-      edits['[LETTER_TEXT]']=el.textContent.trim();
+    const t=el?el.textContent.trim():'';
+    if(t && t!=='[LETTER_TEXT]') edits['[LETTER_TEXT]']=t;
   }
 
   // specials
